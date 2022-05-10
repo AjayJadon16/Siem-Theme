@@ -40,6 +40,7 @@ const AuthProvider = ({ children }: Props) => {
 
   // ** Hooks
   const router = useRouter()
+  
 
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
@@ -54,10 +55,12 @@ const AuthProvider = ({ children }: Props) => {
               Authorization: `Bearer ${window.localStorage.getItem(authConfig.storageTokenKeyName)}`
             }
           })
-          .then(async response => {
-            setLoading(false)
+          .then( response => {
             
-            setUser({ ...response.data.data })
+            setLoading(false)
+            console.log(response.data)
+            setUser({ ...response.data })
+          
           })
           .catch((error) => {
             console.log(error)
@@ -89,9 +92,12 @@ const AuthProvider = ({ children }: Props) => {
           })
           .then(async response => {
             const returnUrl = router.query.returnUrl
+            // response.data.role= "admin"
+            console.log(response.data)
+           
 
-            setUser({ ...response.data.userData })
-            await window.localStorage.setItem('userData', JSON.stringify(response.data.data))
+            setUser({ ...response.data })
+            await window.localStorage.setItem('userData', JSON.stringify(response.data))
 
             const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
 

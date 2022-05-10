@@ -2,5 +2,5 @@ export default {
   meEndpoint: '/me',
   loginEndpoint: '/login',
   registerEndpoint: '/register',
-  storageTokenKeyName: 'accessToken'
+  storageTokenKeyName: 'token'
 }
